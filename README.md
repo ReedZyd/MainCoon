@@ -1,7 +1,8 @@
 # Shakoshako 猫舍官网 · 维护指南
 
-网站地址：**https://reedzyd.github.io/MainCoon/**
-仓库地址：**https://github.com/ReedZyd/MainCoon**
+网站地址：**https://kuenmaoshe.github.io**
+仓库地址：**https://github.com/kuenmaoshe/kuenmaoshe.github.io**
+（备用镜像：https://reedzyd.github.io/MainCoon/ ，仓库 ReedZyd/MainCoon，内容同步更新）
 
 网站是纯静态页面，托管在 GitHub Pages 上，**免费、无服务器、无数据库**。
 所有内容（小猫、种猫、新闻、家长反馈、设置）都来自一个 Excel 文件：**`data/kittens.xlsx`**。
@@ -98,5 +99,4 @@
 - [ ] **录入 8 月 2 日的两笔出售**：银虎斑弟弟 → 黑龙江、烟灰色弟弟 → 重庆。请在小猫表找到对应的那两只，把 是否出售 改为"是"、新家地址 填上，再到新闻表加两条（日期 2026-08-02、类型 出售）
 - [ ] 其余已售小猫逐步补充 名字 和 新家地址
 - [ ] 家长反馈表开始积累内容（配图更好）
-- [ ] **迁移到国内节点**：github.io 在国内时好时坏。过渡方案 = Cloudflare Pages 镜像（注册账号给 Claude 一个 API Token 即可）；正式方案 = 腾讯云 COS+CDN（需实名账号 + 域名 ICP 备案，备案约 1-2 周）
 - [ ] 可选：做一个网页版管理后台（不用碰 Excel，在网页上直接编辑，改动自动提交），需要时找 Claude
