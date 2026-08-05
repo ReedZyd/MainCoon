@@ -303,7 +303,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
           color: String(r[0]).trim(),
           gender: String(r[1] || "").trim(),
           imgs: String(r[2]).split(/[,\uFF0C]/).map(function (s) { return s.trim(); }).filter(Boolean),
-          status: (function (v) { return v === "是" ? "sold" : (v === "预定" || v === "已预订" || v === "已预定") ? "reserved" : "available"; })(String(r[3] || "").trim()),
+          status: (function (v) { return (v === "是" || v === "预定" || v === "已预订" || v === "已预定") ? "sold" : "available"; })(String(r[3] || "").trim()),
           birth: parseBirth(r[4]),
           home: String(r[5] || "").trim(),
           dad: String(r[6] || "").trim(),
@@ -456,11 +456,6 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
         { label: "妹妹", value: "female" }
       ], "gender");
       var statusVals = { "全部": null, "待出售": "available", "已出售": "sold" };
-      var resBtn = document.createElement("button");
-      resBtn.textContent = "\u5df2\u9884\u5b9a";
-      resBtn.setAttribute("data-value", "reserved");
-      var soldBtn = filterBox.querySelector("button:nth-of-type(3)");
-      filterBox.insertBefore(resBtn, soldBtn);
       var statusLabel = document.createElement("span");
       statusLabel.className = "filter-label";
       statusLabel.textContent = "状态";
@@ -751,8 +746,10 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
     if (!grid || !parents.length) return;
     grid.innerHTML = parents.map(function (p, i) {
       var media = p.img.split(/[,\uFF0C]/).map(function (s) { return s.trim(); }).filter(Boolean);
+      var isVideo = media.every(function (s) { return /\.mp4(\?|$)/i.test(s); });
+      var badge = media.length > 1 ? '<span class="multi-badge">' + media.length + (isVideo ? " \u4e2a\u89c6\u9891" : " \u5f20") + " \u2190\u2192</span>" : "";
       return '<figure class="parent-card" tabindex="0" data-parent="' + esc(p.name) + '" data-role="' + esc(p.role) + '" data-media="' + esc(media.join("|")) + '">' +
-        mediaTag(media[0], "parent-media") +
+        badge + mediaTag(media[0], "parent-media") +
         '<figcaption><span>0' + (i + 1) + '</span><div><h3>' + esc(p.name) + '</h3>' +
         '<p>' + esc((p.role ? p.role + " \u00b7 " : "") + p.color) + '</p></div></figcaption></figure>';
     }).join("");
@@ -857,8 +854,12 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
       if (!r) return;
       var hasMore = r.dad || r.mom ||
         (r.name && FEEDBACK.some(function (f) { return f.cat === r.name; }));
-      if (!hasMore) { c.style.cursor = "default"; return; }
-      c.addEventListener("click", function () { openKittenDrawer(r); });
+      var cg2 = (r.color || "") + (r.gender || "");
+      var nm2 = cg2 + (r.name ? " \u00b7 " + r.name : "");
+      c.addEventListener("click", function () {
+        if (hasMore) openKittenDrawer(r);
+        else openLightbox(r.imgs, nm2);
+      });
     });
   }
 
