@@ -790,10 +790,12 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
   }
   function wireKittenToParents() {
     document.querySelectorAll(".kitten-card").forEach(function (c) {
-      c.addEventListener("click", function () {
-        var r = KITTENS[parseInt(c.getAttribute("data-idx"), 10)];
-        if (r) openKittenDrawer(r);
-      });
+      var r = KITTENS[parseInt(c.getAttribute("data-idx"), 10)];
+      if (!r) return;
+      var hasMore = r.imgs.length > 1 || r.dad || r.mom ||
+        (r.name && FEEDBACK.some(function (f) { return f.cat === r.name; }));
+      if (!hasMore) { c.style.cursor = "default"; return; }
+      c.addEventListener("click", function () { openKittenDrawer(r); });
     });
   }
 
