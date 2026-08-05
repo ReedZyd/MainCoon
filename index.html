@@ -880,7 +880,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
     var grid = document.querySelector(".about .fact-grid");
     if (!grid) return;
     var avail = 0, sold = 0;
-    kittens.forEach(function (r) { if (r.status === "sold") sold++; else if (r.status === "available") avail++; });
+    kittens.forEach(function (r) { if (r.status === "available") avail++; else sold++; });
     var tiles = [["\u5728\u552e\u732b\u54aa", avail + " \u53ea"], ["\u5df2\u552e\u732b\u54aa", sold + " \u53ea"]];
     if (settings && settings["\u6210\u7acb\u65e5\u671f"]) tiles.push(["\u6210\u7acb\u65e5\u671f", settings["\u6210\u7acb\u65e5\u671f"]]);
     tiles.reverse().forEach(function (t) {
