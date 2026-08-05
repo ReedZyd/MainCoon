@@ -2,7 +2,6 @@
 
 网站地址：**https://kuenmaoshe.github.io**
 仓库地址：**https://github.com/kuenmaoshe/kuenmaoshe.github.io**
-（备用镜像：https://reedzyd.github.io/MainCoon/ ，仓库 ReedZyd/MainCoon，内容同步更新）
 
 网站是纯静态页面，托管在 GitHub Pages 上，**免费、无服务器、无数据库**。
 所有内容（小猫、种猫、新闻、家长反馈、设置）都来自一个 Excel 文件：**`data/kittens.xlsx`**。
