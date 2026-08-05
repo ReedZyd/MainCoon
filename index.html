@@ -237,6 +237,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
       return parts.join("");
     });
     grid.innerHTML = htmlParts.join("");
+    kickVideos(grid);
     return true;
   }
 
@@ -699,6 +700,14 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
     }
   }
 
+  function kickVideos(root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll("video"), function (v) {
+      v.muted = true;
+      v.playsInline = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+  }
   function mediaTag(src, cls) {
     if (/\.mp4(\?|$)/i.test(src)) return '<video class="' + cls + '" src="' + esc(src) + '" muted autoplay loop playsinline preload="metadata"></video>';
     return '<img class="' + cls + '" alt="" loading="lazy" src="' + esc(src) + '">';
@@ -722,6 +731,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
         openLightbox(card.getAttribute("data-media").split("|"), card.querySelector("h3").textContent);
       });
     });
+    kickVideos(grid);
     if (!document.querySelector(".parent-filters")) {
       var row = document.createElement("div");
       row.className = "kitten-filters kitten-filter-group parent-filters";
@@ -755,6 +765,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
       if (e.target === ov || e.target.className === "shk-lb-close") document.body.removeChild(ov);
     });
     document.body.appendChild(ov);
+    kickVideos(ov);
   }
 
   function openKittenDrawer(r) {
@@ -807,6 +818,7 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
     });
     document.body.appendChild(ov);
     document.body.appendChild(panel);
+    kickVideos(panel);
     requestAnimationFrame(function () { ov.classList.add("open"); panel.classList.add("open"); });
   }
   function wireKittenToParents() {
