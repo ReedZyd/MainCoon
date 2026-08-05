@@ -197,9 +197,6 @@
       { label: "3–6个月", value: "m36" },
       { label: "6个月以上", value: "o6" }
     ], "months");
-    makeGroup("毛色", [{ label: "全部", value: null }].concat(presentColors.map(function (g) {
-      return { label: COLOR_LABELS[g], value: g };
-    })), "color");
     makeGroup("性别", [
       { label: "全部", value: null },
       { label: "弟弟", value: "male" },
