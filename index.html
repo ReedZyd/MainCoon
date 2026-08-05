@@ -130,6 +130,9 @@ body.day .theme-toggle{border-color:#cfc4b0;color:#5d574d}.kitten-filter-group{d
       else scrollAnim = null;
     }
     scrollAnim = requestAnimationFrame(step);
+    setTimeout(function () {
+      if (t0 === null) { if (scrollAnim) cancelAnimationFrame(scrollAnim); scrollAnim = null; window.scrollTo(0, targetY); }
+    }, 150);
   }
   ["wheel", "touchstart"].forEach(function (evt) {
     window.addEventListener(evt, function () {
